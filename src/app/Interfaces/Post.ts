@@ -4,3 +4,7 @@ export interface Post {
     imageUrl: string
     userName: string
 }
+export interface addPost {
+    title: string
+    image?: File
+}

@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ResponseAPI } from '../Interfaces/ResponseAPI';
 import { firstValueFrom } from 'rxjs';
-import { Post } from '../Interfaces/Post';
+import { addPost, Post } from '../Interfaces/Post';
 
 @Injectable({
   providedIn: 'root'
@@ -40,6 +40,18 @@ export class ApiServiceService {
     try {
       this.errors = [];
       const response = await firstValueFrom(this.http.get<Post[]>(`${this.baseUrl}/Post`));
+      return Promise.resolve(response);
+    }
+    catch (error: any){
+      let e = error as HttpErrorResponse;
+      this.errors.push(e.error);
+      return Promise.reject(e.error);
+    }
+  }
+  async createPost(form: any): Promise<addPost>{
+    try {
+      this.errors = [];
+      const response = await firstValueFrom(this.http.post<addPost>(`${this.baseUrl}/Post`,form));
       return Promise.resolve(response);
     }
     catch (error: any){

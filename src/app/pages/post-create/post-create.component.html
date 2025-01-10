@@ -1,0 +1,17 @@
+<form (ngSubmit)="createPost()" [formGroup]="form">
+    <div>
+      <label for="title">Título</label>
+      <input type="text" id="title" formControlName="title">
+      <div *ngIf="titleValidate" class="text-danger">
+        El título es requerido.
+      </div>
+      <div>
+      <label for="image">Imagen</label>
+      <input type="file" id="image" (change)="onFileSelected($event)">
+      <div *ngIf="imageValidate" class="text-danger">
+        La iamgen es requerida.
+      </div>
+    </div>
+    </div>
+    <button type="submit">Guardar</button>
+  </form>
