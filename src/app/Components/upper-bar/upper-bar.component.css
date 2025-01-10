@@ -1,6 +1,10 @@
 .top-bar {
-    background-color: #4A90E2;
-    padding: 60px 20px;
-    color: white;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #4A90E2;
+  color: white;
+  padding: 60px 20px;
+  z-index: 1000;
+}

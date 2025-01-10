@@ -5,10 +5,11 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ApiServiceService } from '../../Services/api-service.service';
 import { LocalStorageService } from '../../Services/local-storage.service';
 import { Router } from '@angular/router';
+import { UpperBarComponent } from "../../Components/upper-bar/upper-bar.component";
 
 @Component({
   selector: 'app-register-page',
-  imports: [ReactiveFormsModule, CommonModule, HttpClientModule],
+  imports: [ReactiveFormsModule, CommonModule, HttpClientModule, UpperBarComponent],
   templateUrl: './register-page.component.html',
   styleUrl: './register-page.component.css'
 })
@@ -28,7 +29,8 @@ export class RegisterPageComponent {
       name: ['',[Validators.required]],
       password: ['',[Validators.required, Validators.minLength(6), Validators.pattern(/^(?=.*\d).*$/)]],
       confirmPassword: ['',[Validators.required]]
-    });
+    }, { validators: this.passwordMatchValidator }
+  );
   }
   passwordMatchValidator(group: FormGroup) {
     const password = group.get('password')?.value;
@@ -45,14 +47,17 @@ export class RegisterPageComponent {
   get nameValidate(){
     return this.form.get('name')?.invalid && this.form.get('name')?.touched;
   }
-  get passwordValidate(){
-    const passwordControl = this.form.get('password');
-    return passwordControl?.hasError('required') && passwordControl?.touched ? 'La contraseña es requerida.' :
-            passwordControl?.hasError('minlength') ? 'La contraseña debe tener al menos 6 caracteres.' :
-            passwordControl?.hasError('pattern') ? 'La contraseña debe contener al menos un número.' : null;
+  get passwordValidate(){  
+    return this.form.get('password')?.hasError('required') && this.form.get('password')?.touched;
   }
-  get passwordConfirmationValidate(){
-    return this.form.get('confirmPassword')?.invalid && this.form.get('password_confirmation')?.touched;
+  get passwordminLengthValidate(){
+    return this.form.get('password')?.hasError('minlength') && this.form.get('password')?.touched;
+  }
+  get passwordPatternValidate(){
+    return this.form.get('password')?.hasError('pattern') && this.form.get('password')?.touched;
+  }
+  get passwordMatchValidate(){
+    return this.form.get('confirmPassword')?.hasError('mismatch') && this.form.get('confirmPassword')?.touched;
   }
   async register() {
     if (this.form.invalid){
