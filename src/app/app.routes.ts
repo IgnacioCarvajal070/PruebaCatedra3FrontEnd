@@ -12,11 +12,6 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/register-page/register-page.component').then(m => m.RegisterPageComponent)
     },
     {
-        path: 'main',
-        loadComponent: () => import('./pages/main/main.component').then(m => m.MainComponent),
-        canActivate: [authGuard]
-    },
-    {
         path: 'post-list',
         loadComponent: () => import('./pages/post-list/post-list.component').then(m => m.PostListComponent),
         canActivate: [authGuard]

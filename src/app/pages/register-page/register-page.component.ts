@@ -5,11 +5,11 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ApiServiceService } from '../../Services/api-service.service';
 import { LocalStorageService } from '../../Services/local-storage.service';
 import { Router } from '@angular/router';
-import { UpperBarComponent } from "../../Components/upper-bar/upper-bar.component";
+import { UpperBarRegisterComponent } from "../../Components/upper-bar-register/upper-bar-register.component";
 
 @Component({
   selector: 'app-register-page',
-  imports: [ReactiveFormsModule, CommonModule, HttpClientModule, UpperBarComponent],
+  imports: [ReactiveFormsModule, CommonModule, HttpClientModule,UpperBarRegisterComponent],
   templateUrl: './register-page.component.html',
   styleUrl: './register-page.component.css'
 })
@@ -71,7 +71,7 @@ export class RegisterPageComponent {
         this.LocalStorageService.setVariable('token', response.token);
         this.LocalStorageService.setVariable('user', response.user);
         this.LocalStorageService.setLoggedIn(true);
-        this.router.navigate(['/main']);
+        this.router.navigate(['/post-list']);
       }
       else {
         this.error = true;

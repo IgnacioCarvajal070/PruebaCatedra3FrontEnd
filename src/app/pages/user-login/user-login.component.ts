@@ -49,7 +49,7 @@ export class UserLoginComponent {
         this.localStorageService.setVariable('token', response.token);
         this.localStorageService.setVariable('user', response.user);
         this.localStorageService.setLoggedIn(true);
-        this.router.navigate(['/main']);
+        this.router.navigate(['/post-list']);
       }
       else {
         this.error = true;

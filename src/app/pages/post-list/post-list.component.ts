@@ -3,10 +3,11 @@ import { Post } from '../../Interfaces/Post';
 import { ApiServiceService } from '../../Services/api-service.service';
 import { CommonModule, DatePipe } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UpperBarMainComponent } from "../../Components/upper-bar-main/upper-bar-main.component";
 
 @Component({
   selector: 'app-post-list',
-  imports: [CommonModule,ReactiveFormsModule,DatePipe],
+  imports: [CommonModule, ReactiveFormsModule, DatePipe, UpperBarMainComponent],
   templateUrl: './post-list.component.html',
   styleUrl: './post-list.component.css'
 })
