@@ -7,11 +7,29 @@ import { addPost, Post } from '../Interfaces/Post';
 @Injectable({
   providedIn: 'root'
 })
+/**
+ * Servicio de la API
+ */
 export class ApiServiceService {
+  /**
+   * URL base de la API
+   */
   private baseUrl = 'http://localhost:5021/api';
+  /**
+   * Lista de errores
+   */
   public errors: string[] = [];
+  /**
+   * Constructor de la clase
+   * @param http Cliente HTTP
+   */
   constructor(private http: HttpClient) { }
 
+  /**
+   * Inicia sesión
+   * @param form Formulario de inicio de sesión
+   * @returns Respuesta de la API
+   */
   async login (form: any): Promise<ResponseAPI>{
     try {
       this.errors = [];
@@ -24,6 +42,11 @@ export class ApiServiceService {
       return Promise.reject(e.error);
     }
   }
+  /**
+   * Registra un usuario
+   * @param form Formulario de registro
+   * @returns Respuesta de la API
+   */
   async register (form: any): Promise<ResponseAPI>{
     try {
       this.errors = [];
@@ -36,6 +59,10 @@ export class ApiServiceService {
       return Promise.reject(e.error);
     }
   }
+  /**
+   * Obtiene los posts
+   * @returns Lista de posts
+   */
   async getPosts(): Promise<Post[]>{
     try {
       this.errors = [];
@@ -48,6 +75,11 @@ export class ApiServiceService {
       return Promise.reject(e.error);
     }
   }
+  /**
+   * Crea un post
+   * @param form Formulario de creación de post
+   * @returns Respuesta de la API
+   */
   async createPost(form: any): Promise<addPost>{
     try {
       this.errors = [];

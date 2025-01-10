@@ -12,26 +12,57 @@ import { UpperbarPostCreateComponent } from "../../Components/upperbar-post-crea
   templateUrl: './post-create.component.html',
   styleUrl: './post-create.component.css'
 })
+/**
+ * Componente de la creación de posts
+ */
 export class PostCreateComponent {
+    /**
+    * Formulario de creación de posts
+    */
     form!: FormGroup;
+    /**
+     * Auxiliar para evitar la creación de multiples posts
+     */
     auxPost: number = 0;
+    /**
+     * Archivo de la imagen del post
+     */
     file: File | null = null;
+    /**
+     * Constructor de la clase
+     * @param apiService Servicio para la API
+     * @param fb FormBuilder para el formulario
+     * @param http Cliente HTTP
+     * @param router Router de la aplicación
+     */
     constructor(private apiService: ApiServiceService,private fb: FormBuilder, private http: HttpClient, private router: Router) {
         this.formulario();
     }
+    /**
+     * Inicializa el formulario
+     */
     formulario(){
     this.form = this.fb.group({
         title: ['',[Validators.required]],
         image: ['',[Validators.required]]
       });
     }
+    /**
+     * Metodo validador del campo titulo
+     */
     get titleValidate(){
       return this.form.get('title')?.invalid && this.form.get('title')?.touched;
     }
+    /**
+     * Metodo validador del campo imagen
+     */
     get imageValidate(){
       return this.form.get('image')?.invalid && this.form.get('image')?.touched;
     }
-    
+    /**
+     * Metodo para crear un post
+     * @returns
+     */
     async createPost() {
       if (this.form.invalid){
         return Object.values(this.form.controls).forEach(control => {
@@ -56,12 +87,19 @@ export class PostCreateComponent {
           console.log(error);
         }
       }
+    /**
+     * Metodo para seleccionar un archivo
+     * @param event Evento de seleccion de archivo
+     */
     onFileSelected(event: any){
       const file = event.target.files[0];
       if (file){
         this.file = file;
       }
     }
+    /**
+     * Metodo para navegar a la lista de posts
+     */
     navigateToPostList(){
       this.router.navigate(['post-list']);
     }
