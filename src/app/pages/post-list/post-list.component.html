@@ -13,7 +13,7 @@
           <h4>{{ post.title }}</h4>
           <img [src]="post.imageUrl" alt="Post Image">
             <p>Publicado por: {{ post.userName }}</p>
-          <small class="text-muted">Publicado el: {{ post.date | date:'dd/MM/yyyy' }}</small>
+          <small class="text-muted">Publicado el: {{ post.date | date:'dd/MM/yyyy HH:mm' }}</small>
         </li>
       </ul>
     </div>
