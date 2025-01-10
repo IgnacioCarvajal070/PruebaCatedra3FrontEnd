@@ -1,1 +1,18 @@
-<p>main works!</p>
+<div class="container">
+    <h1>Bienvenido al Panel Principal</h1>
+  
+    <!-- Botón para navegar a la lista de posts -->
+    <button (click)="navigateToPostList()" class="btn btn-primary">
+      Ver Lista de Posts
+    </button>
+  
+    <!-- Botón para navegar a la creación de un nuevo post -->
+    <button (click)="navigateToCreatePost()" class="btn btn-success">
+      Crear Nuevo Post
+    </button>
+  
+    <!-- Botón de logout -->
+    <button (click)="logout()" class="btn btn-danger">
+      Cerrar Sesión
+    </button>
+  </div>

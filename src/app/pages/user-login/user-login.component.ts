@@ -57,7 +57,7 @@ export class UserLoginComponent {
       }
     } catch (error: any) {
       this.error = true;
-      this.errorMessage = error;
+      this.errorMessage = error.message;
     }
   }
 }
