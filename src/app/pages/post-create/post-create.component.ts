@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-post-create',
-  imports: [DatePipe, CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './post-create.component.html',
   styleUrl: './post-create.component.css'
 })

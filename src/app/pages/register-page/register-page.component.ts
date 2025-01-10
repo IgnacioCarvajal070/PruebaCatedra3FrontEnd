@@ -26,7 +26,7 @@ export class RegisterPageComponent {
     this.form = this.fb.group({
       email: ['',[Validators.required, Validators.email]],
       name: ['',[Validators.required]],
-      password: ['',[Validators.required]],
+      password: ['',[Validators.required, Validators.minLength(6), Validators.pattern(/^(?=.*\d).*$/)]],
       confirmPassword: ['',[Validators.required]]
     });
   }
@@ -46,7 +46,10 @@ export class RegisterPageComponent {
     return this.form.get('name')?.invalid && this.form.get('name')?.touched;
   }
   get passwordValidate(){
-    return this.form.get('password')?.invalid && this.form.get('password')?.touched;
+    const passwordControl = this.form.get('password');
+    return passwordControl?.hasError('required') && passwordControl?.touched ? 'La contraseña es requerida.' :
+            passwordControl?.hasError('minlength') ? 'La contraseña debe tener al menos 6 caracteres.' :
+            passwordControl?.hasError('pattern') ? 'La contraseña debe contener al menos un número.' : null;
   }
   get passwordConfirmationValidate(){
     return this.form.get('confirmPassword')?.invalid && this.form.get('password_confirmation')?.touched;
