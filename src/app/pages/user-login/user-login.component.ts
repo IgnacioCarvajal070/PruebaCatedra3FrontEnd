@@ -60,4 +60,7 @@ export class UserLoginComponent {
       this.errorMessage = error.message;
     }
   }
+  navigateToRegister(){
+    this.router.navigate(['/register']);
+  }
 }

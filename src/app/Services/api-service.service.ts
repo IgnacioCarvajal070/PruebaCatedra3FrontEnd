@@ -23,4 +23,16 @@ export class ApiServiceService {
       return Promise.reject(e.error);
     }
   }
+  async register (form: any): Promise<ResponseAPI>{
+    try {
+      this.errors = [];
+      const response = await firstValueFrom(this.http.post<ResponseAPI>(`${this.baseUrl}/Auth/register`,form));
+      return Promise.resolve(response);
+    }
+    catch (error: any){
+      let e = error as HttpErrorResponse;
+      this.errors.push(e.error);
+      return Promise.reject(e.error);
+    }
+  }
 }
