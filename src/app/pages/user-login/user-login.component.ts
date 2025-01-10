@@ -4,10 +4,10 @@ import { ApiServiceService } from '../../Services/api-service.service';
 import { LocalStorageService } from '../../Services/local-storage.service';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-
+import { UpperBarComponent } from "../../Components/upper-bar/upper-bar.component";
 @Component({
   selector: 'app-user-login',
-  imports: [ReactiveFormsModule, RouterModule, CommonModule],
+  imports: [ReactiveFormsModule, RouterModule, CommonModule, UpperBarComponent],
   templateUrl: './user-login.component.html',
   styleUrl: './user-login.component.css'
 })
