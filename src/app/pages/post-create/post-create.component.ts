@@ -4,17 +4,19 @@ import { ApiServiceService } from '../../Services/api-service.service';
 import { CommonModule, DatePipe } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-
+import { Router, RouterModule } from '@angular/router';
+import { UpperbarPostCreateComponent } from "../../Components/upperbar-post-create/upperbar-post-create.component";
 @Component({
   selector: 'app-post-create',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule, UpperbarPostCreateComponent],
   templateUrl: './post-create.component.html',
   styleUrl: './post-create.component.css'
 })
 export class PostCreateComponent {
     form!: FormGroup;
+    auxPost: number = 0;
     file: File | null = null;
-    constructor(private apiService: ApiServiceService,private fb: FormBuilder, private http: HttpClient) {
+    constructor(private apiService: ApiServiceService,private fb: FormBuilder, private http: HttpClient, private router: Router) {
         this.formulario();
     }
     formulario(){
@@ -37,11 +39,18 @@ export class PostCreateComponent {
           });
       }
       try {
+        if (this.auxPost == 0){
+        this.auxPost = 1;
         const formData = new FormData();
         formData.append('title', this.form.get('title')?.value);
         formData.append('image', this.file as Blob);
+        
         const response = await this.apiService.createPost(formData);
-        console.log(response);
+          this.navigateToPostList();
+        }
+        else {
+          return;
+        }
         }
         catch (error: any){
           console.log(error);
@@ -52,5 +61,8 @@ export class PostCreateComponent {
       if (file){
         this.file = file;
       }
+    }
+    navigateToPostList(){
+      this.router.navigate(['post-list']);
     }
   }
